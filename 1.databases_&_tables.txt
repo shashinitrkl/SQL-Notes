@@ -1,0 +1,96 @@
+___________________________________________________________________________________________________________________________
+
+##  DATABASES   ##
+___________________________________________________________________________________________________________________________
+1.  CREATE DATABASE -- To create a database
+    Query Syntax --
+        CREATE DATABASE <db_name>;
+
+2.  SHOW DATABASES -- To show all the databases in the DBMS.
+
+    Query Syntax --
+        SHOW DATABASES;
+
+3.  USE -- To activate/use a particular database.
+
+    Query Syntax --
+        USE <db_name>;
+
+4.  SELECT DATABASE -- To see the database which is currently active. DATABASE() here is a function call with SELECT clause.
+
+    Query Syntax --
+        SELECT DATABASE();
+
+5. DROP DATABASE -- To delete a database
+
+    Query Syntax --
+        DROP DATABASE <db_name>
+___________________________________________________________________________________________________________________________
+       
+##  TABLES  ##
+___________________________________________________________________________________________________________________________
+6.  CREATE TABLE -- To create a table schema in the selected database.
+
+    Query Syntax -- 
+        CREATE TABLE <table_name> 
+            (
+                <column_name> <column_datatype> <other_attr1> <other_attr2>,
+                <column_name> <column_datatype> <other_attr1> <other_attr2>,
+                <column_name> <column_datatype> <other_attr1> <other_attr2>
+            );
+
+7.  SHOW TABLES -- To show all the tables
+
+    Query Syntax -- 
+        SHOW TABLES;
+
+8.  SHOW COLUMNS FROM / DESCRIBE / DESC -- To show details of a table or description of a table
+
+    Query Syntax 1 --
+        SHOW COLUMNS FROM <table_name>;
+
+    Query Syntax 2 --
+        DESCRIBE <table_name>;
+
+    Query Syntax 3 --
+        DESC <table_name>;
+
+
+9.  DROP TABLE -- To delete a table
+
+    Query Syntax --
+        DROP TABLE <table_name>
+___________________________________________________________________________________________________________________________
+
+## OTHER ATTRIBUTES (while creating a table)  ## Includes NULL, PRIMARY KEY, DEFAULT, EXTRA(e.g. AUTO_INCREMENT)
+___________________________________________________________________________________________________________________________
+
+NOTE :  Other attributes (NOT NULL , DEFAULT, PRIMARY KEY, AUTO_INCREMENT) can be added to the column fields during initialization.
+                Redundant to specify NOT NULL to PRIMARY KEY as it can not be null or blank.
+
+            e.g 1 -- CREATE TABLE <table_name>
+                    (
+                        id INT PRIMARY KEY,
+                        name VARCHAR(50) NOT NULL DEFAULT 'Unknown',
+                        age INT NOT NULL DEFAULT 0
+                    );
+
+            e.g 2 -- Another way to specify the primary KEY
+                    CREATE TABLE <table_name>
+                    (
+                        id INT,
+                        name VARCHAR(50) NOT NULL DEFAULT 'Unknown',
+                        age INT NOT NULL DEFAULT 0,
+                        PRIMARY KEY(id)
+                    );
+
+            e.g 3 -- AUTO_INCREMENT
+                    CREATE TABLE <table_name>
+                    (
+                        id INT PRIMARY KEY AUTO_INCREMENT,
+                        name VARCHAR(20) NOT NULL,
+                        age INT NOT NULL
+                    );
+
+
+

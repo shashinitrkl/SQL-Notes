@@ -1,0 +1,150 @@
+-------------------------------------------------------------------------------------------------------------------------
+Before moving forward : Let us add few more books to the books table.
+                        Command :
+                            INSERT INTO books
+                                (title, author_fname, author_lname, released_year, stock_quantity, pages)
+                                VALUES ('10% Happier', 'Dan', 'Harris', 2014, 29, 256), 
+                                       ('fake_book', 'Freida', 'Harris', 2001, 287, 428),
+                                       ('Lincoln In The Bardo', 'George', 'Saunders', 2017, 1000, 367);
+-------------------------------------------------------------------------------------------------------------------------
+1.  DISTINCT -  To eliminate duplicate results. 
+                Only getting distinct results in a query.
+                The column names after the keyword DISTINCT need not be in the parentheses.
+
+    Query Syntax --
+        SELECT DISTINCT <column_name> FROM <table_name>
+
+            e.g. 1 --   SELECT DISTINCT author_lname FROM books;
+                            -- Returns all unique author last names.
+
+            e.g. 2 --   SELECT DISTINCT author_fname, author_lname FROM books;
+                            -- Returns all unique combination of first name and last name i.e. the full name. 
+                            -- It is shown in two separate columns with their respective names.
+                            -- This does not mean the full names of all authors with unique first name.
+
+            e.g. 3 --   SELECT DISTINCT CONCAT(author_fname, ' ', author_lname) AS author FROM books;
+                            -- This also gives the unique full names of the authors. 
+                            -- It is shown in a single column named author.
+
+            e.g. 4 --   SELECT DISTINCT author_fname, author_lname, released_year FROM books;
+                            -- All unique combinations of the mentioned columns.
+-------------------------------------------------------------------------------------------------------------------------
+2.  ORDER BY -  To sort the results in increasing or decreasing order.
+                First the select query fetches the entire data and then sorts it according to the chosen column.
+                By default the sorting is done is ascending order. For descending, it needs to be mentioned.
+                The column needed to sort the query may or may not be a part of the select query.
+                
+                A good practice --  To select the column used for sorting so that the sorting can be visualized.
+
+    Query Syntax --
+        -- Default | Ascending --  ASC can be used for ascending too. 
+            SELECT <column_name> FROM <table_name>
+            ORDER BY <column_name>; 
+            
+            | OR |
+            
+            SELECT <column_name> FROM <table_name>
+            ORDER BY <column_name> ASC;
+
+        -- Descending -- DESC is used for descending.
+            SELECT <column_name> FROM <table_name>
+            ORDER BY <column_name> DESC;
+
+            e.g. 1 --   SELECT book_id, author_fname, author_lname FROM books
+                        ORDER BY author_lname;
+
+            e.g. 2 --   SELECT book_id, title, stock_quantity FROM books
+                        ORDER BY stock_quantity;
+
+            e.g. 3 --   SELECT book_id, title, author_fname, author_lname FROM books
+                        ORDER BY released_year ASC; 
+
+            e.g. 4 --   SELECT book_id, title, released_year, pages FROM books
+                        ORDER BY pages DESC; 
+
+    || ORDER BY multiple columns : VERY USEFUL CONCEPT -- SORT WITHIN SORT
+
+        This will sort by the first column first and then by the second column and the third and fourth and so on.
+        This does not mean sorting the result by the combination of columns together.
+        DESC needs to be specified for each column individually if required. (See e.g. 4)
+
+        -- Remember this : Sorting is one after the other and not together.
+
+            e.g. 1 --   SELECT author_lname, released_year, title FROM books
+                        ORDER BY author_lname, released_year;
+
+                            -- First the result is sorted by the author last name
+                            -- Secondly the sorting is done by released year within the first sorted result 
+                            -- Run this query to see the result for better understanding
+
+            e.g. 2 --   SELECT author_lname, released_year, title FROM books
+                        ORDER BY author_lname, released_year DESC;
+
+                            -- Ascending order of author last name
+                            -- Within that sorted result, descending order of released year
+
+            e.g. 3 --   SELECT author_lname, released_year, title FROM books
+                        ORDER BY author_lname DESC, released_year;
+
+                            -- Descending order of author last name
+                            -- Within that sorted result, ascending order of released year
+
+            e.g. 4 --   SELECT author_lname, released_year, title FROM books
+                        ORDER BY author_lname DESC, released_year DESC;
+
+                            -- Descending order of author last name
+                            -- Within that sorted result, descending order of released year
+
+    || ORDER BY alias :
+
+        We can also order by columns that aren't necessarily part of the table but are results of a SQL query.
+        By using an alias for the result we can reference that name in ORDER BY later on.
+        
+
+            e.g. 1 --   SELECT CONCAT(author_fname, ' ', author_lname) AS author FROM books
+                        ORDER BY author;
+
+                            -- Author is not a part of the database. No column is named author in the database.
+                            -- We can alias a result from the database and use that alias in ORDER BY to sort the result.
+
+            e.g. 2 --   SELECT DISTINCT CONCAT(author_fname, ' ', author_lname) AS author FROM books
+                        ORDER BY author DESC;
+
+            e.g. 3 --   SELECT CONCAT(author_fname, ' ', author_lname) AS author, released_year, title FROM books
+                        ORDER BY author, released_year;
+
+            e.g. 4 --   SELECT CONCAT(author_fname, ' ', author_lname) AS author, released_year AS year, title FROM books
+                        ORDER BY author, year DESC;
+
+    || More on ORDER BY :  NOT MUCH USEFUL -- A BAD PRACTICE
+
+        Selection of column for sorting can also be done by mentioning a number.
+        The number represents the position of the column in select query.
+        It compromises code readability.
+
+            e.g. 1 --   SELECT book_id, title, released_year, pages FROM books
+                        ORDER BY 4; 
+            e.g. 2 --   SELECT book_id, title, released_year, pages FROM books
+                        ORDER BY 3 DESC; 
+-------------------------------------------------------------------------------------------------------------------------
+3.  LIMIT --
+
+    Query Syntax --
+        SELECT
+
+            e.g. 1 --  
+-------------------------------------------------------------------------------------------------------------------------
+4.  LIKE --
+
+    Query Syntax --
+        SELECT
+
+            e.g. 1 --  
+-------------------------------------------------------------------------------------------------------------------------
+5.  Escaping Wildcards --
+
+    Query Syntax --
+        SELECT
+
+            e.g. 1 --  
+

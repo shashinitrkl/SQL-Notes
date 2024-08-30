@@ -1,0 +1,164 @@
+___________________________________________________________________________________________________________________________________
+
+##  GENERAL UNDERSTANDING   ##
+___________________________________________________________________________________________________________________________________
+
+SQL QUERY : SELECT <function with parentheses enclosing columns as arguments> AS xxxxx from <table_name>;
+
+## This will execute the function on the columns and display the result in a column name aliased as xxxxx.
+## If parentheses is not present SQL will read it as a column_name and won't find it and throw an error.
+## Nested functions can be used to write complex queries. Inner-most function is evaluated first and so on.
+## In the following example CONCAT is nested inside CONCAT_WS.
+
+e.g. : SELECT CONCAT_WS(' | ', title, CONCAT('Year', '-', released_year), CONCAT('Pages', '-', pages)) AS book_details FROM books;
+
+    -- 'title', 'released_year' and 'pages' are column names of 'books' table in 'book_shop' database.
+
+___________________________________________________________________________________________________________________________________
+
+##  STRING FUNCTIONS   ##
+___________________________________________________________________________________________________________________________________
+1.  CONCAT  --  To combine data. It is used to concatinate a set of strings together. 
+                If any of the strings is NULL, the response is NULL
+   
+    Query Syntax --
+        SELECT CONCAT('H', 'e', 'l', 'l', 'o');                                                     -- Result : "Hello"
+
+        SELECT CONCAT(<col1>, '=', <col2>, '=', <col3>) AS combined_columns FROM <table_name>;      -- Result : "col1=col2=col3"
+
+        SELECT CONCAT(<col1>, ' = ', <col2>) AS combined_columns FROM <table_name>;                 -- Result : "col1 = col2"
+-----------------------------------------------------------------------------------------------------------------------------------
+2.  CONCAT_WS  --   To concatinate the arguments with separator.
+    
+    Query Syntax --
+        SELECT CONCAT_WS(<separator>, col1, col2, col3) as combined_columns_ws FROM <table_name>;
+
+            e.g. 1 -- SELECT CONCAT_WS('-', 'Hello', 'John');                                       -- Result : "Hello-John"
+            e.g. 2 -- SELECT CONCAT_WS('/', <col1>, <col2>, <col3>) from <table_name>;              -- Result : "col1/col2/col3"
+-----------------------------------------------------------------------------------------------------------------------------------
+3.  SUBSTRING | SUBSTR  --  To trim a string. It is used to extract a part of the root string.
+
+    Query Syntax --
+        SELECT SUBSTRING(<root_string>, <starting_position : int>, <number_of_characters_required : int>);
+
+            e.g. -- SELECT SUBSTRING('Hello World', 1, 4);                                          -- Result : "Hell"
+                        -- If only one integer is given, then this is the starting position. 
+                        -- The length is not specified, so it will go to the end.
+            
+            e.g. -- SELECT SUBSTRING('Hello World', 5);                                             -- Result : "o World"
+                        -- Negative integers mean that the counting will begin from the end. 
+                        -- Generally used when the length of string is unknown.
+            
+            e.g. -- SELECT SUBSTRING('Hello World', -3);                                            -- Result : "rld"
+
+            Special Cases :
+                1.  Getting the last character of the string.
+                        SELECT SUBSTR('Hello World', -1, 1);  OR 
+                        SELECT SUBSTR('Hello World', -1);                                           -- Result : "d"
+
+                2.  Getting the 2nd character from the end.
+                        SELECT SUBSTR('Hello World', -2, 1);                                        -- Result : "l"
+-----------------------------------------------------------------------------------------------------------------------------------
+4.  REPLACE  -- To replace a part of a string with another replacement string.
+                It requires 3 arguments : 
+                    -   the root string, 
+                    -   part of the root string we want to replace & 
+                    -   what we want to replace it with.
+                    
+                Note :  This doesn't update any data in the table.
+                        It returns NULL if any of its arguments is NULL.
+                        ** This is CASE SENSITIVE.
+
+    Query Syntax --
+        SELECT REPLACE(<root_string>, <substr_to_be_replaced>, <str_to_be_replaced_with>)
+
+            e.g. -- SELECT REPLACE('Hello World', 'Hell', 'Khel');                                  -- Result : 'Khelo World'
+            e.g. -- SELECT REPLACE('Hello World', 'Hello', 'Bye Bye');                              -- Result : 'Bye Bye World'
+            e.g. -- SELECT REPLACE('Hello World', 'hello', '*****');                                -- Result : 'Hello World'
+            e.g. -- SELECT REPLACE('Hello World', 'Hello', '*****');                                -- Result : '***** World'
+-----------------------------------------------------------------------------------------------------------------------------------
+5.  REVERSE  -- Returns the string with order of characters reversed.
+                Casing remains the same.
+                Returns NULL if str is NULL. 
+
+    Query Syntax --
+        SELECT REVERSE(<string>);
+
+            e.g. -- SELECT REVERSE('Abc');                                                          -- Result : 'cbA'
+            e.g. -- SELECT REVERSE(NULL);                                                           -- Result : NULL
+-----------------------------------------------------------------------------------------------------------------------------------
+6.  CHAR_LENGTH  -- Returns the number of characters in argument (int | str | float | bool).
+                    Not to be misunderstood as LENGTH function. It gives the length of a string in bytes.
+
+    Query Syntax --
+        SELECT CHAR_LENGTH(<argument>);
+
+            e.g. -- SELECT CHAR_LENGTH('Hello World');                                              -- Result : 11
+            e.g. -- SELECT CHAR_LENGTH(true);                                                       -- Result : 1
+            e.g. -- SELECT CHAR_LENGTH(false);                                                      -- Result : 1
+            e.g. -- SELECT CHAR_LENGTH('true');                                                     -- Result : 4
+            e.g. -- SELECT CHAR_LENGTH('false');                                                    -- Result : 5
+-----------------------------------------------------------------------------------------------------------------------------------
+7.  UPPER | LOWER --  To change a string's casing.
+                    UPPER() & LOWER() are also callable as UCASE() & LCASE() respectively.
+
+    Query Syntax --
+        SELECT UPPER(<string>);
+
+            e.g. -- SELECT UPPER('Hello')                                                           -- Result : 'HELLO'
+            e.g. -- SELECT LOWER('Hello')                                                           -- Result : 'hello'
+            e.g. -- SELECT UCASE('World')                                                           -- Result : 'WORLD'
+            e.g. -- SELECT LCASE('World')                                                           -- Result : 'world'
+-----------------------------------------------------------------------------------------------------------------------------------
+8.  INSERT -- Removes characters and inserts new string at the given position.
+              Takes 4 arguments.
+
+    Query Syntax --
+        SELECT INSERT (str, position, remove_chars_at_position, newstr);
+
+            e.g. -- SELECT INSERT ('Hello World', 4, 2, '!*!*');
+                        -- In the string, removes 2 characters and adds '!*!*' at 4th position.     -- Result : 'Hel!*!* World'
+
+            e.g. -- SELECT INSERT ('Hello John', 7, 0, 'There ');                                                       
+                        -- No characters removed here.                                              -- Result : 'Hello There John'
+-----------------------------------------------------------------------------------------------------------------------------------
+9.  LEFT -- Substring from the left. Takes 2 arguments. 
+            One is the string and the other is the number of characters.
+
+    Query Syntax --
+        SELECT LEFT(<string>, <#_of_characters>);
+
+            e.g. -- SELECT LEFT('Hello World', 4);                                                 -- Result : 'Hell'
+            e.g. -- SELECT LEFT('   *$hell', 5);                                                   -- Result : '   *$'
+-----------------------------------------------------------------------------------------------------------------------------------
+10.  RIGHT --   Substring from the right. Remember this does not mean that the string is reversed.
+                Takes 2 arguments. One is the string and the other is the number of characters.
+
+    Query Syntax --
+        SELECT RIGHT(<string>, <#_of_characters>);
+
+            e.g. -- SELECT RIGHT('Hello World', 4);                                                -- Result : 'orld'
+            e.g. -- SELECT RIGHT('*$  *$ ', 5);                                                    -- Result : '  *$ '
+-----------------------------------------------------------------------------------------------------------------------------------
+11.  REPEAT --  To repeat the string multiple times. Takes 2 arguments.
+                One is the string and the other is the number of times the string is repeated. 
+    
+    Query Syntax --
+        SELECT REPEAT(<string>, <#_of_repetitions>);
+
+            e.g. -- SELECT REPEAT('ha', 3);                                                        -- Result : 'hahaha'
+            e.g. -- SELECT REPEAT('ha ', 3);                                                       -- Result : 'ha ha ha '
+-----------------------------------------------------------------------------------------------------------------------------------
+12.  TRIM   --  To remove spaces that are (leading | trailing | both) from the given string.
+                Other characters can also be specified and trimmed from the given string.
+
+    Query Syntax --
+        SELECT TRIM (<string with leading and trailing spaces >);
+        SELECT TRIM (LEADING | TRAILING | BOTH <character> FROM <root_string>);
+
+            e.g. -- SELECT TRIM('    hello world    ')                                             -- Result : 'hello world'
+                        -- Removes the leading and trailing spaces but does not remove the spaces in between
+
+            e.g. -- SELECT TRIM(LEADING '.' FROM '.....hello world.....');                        -- Result : 'hello world.....'
+            e.g. -- SELECT TRIM(TRAILING '.' FROM '.....hello world.....');                       -- Result : '.....hello world'
+            e.g. -- SELECT TRIM(BOTH '.' FROM '.....hello world.....');                           -- Result : 'hello world'

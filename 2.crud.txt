@@ -1,0 +1,69 @@
+________________________________________________________________________________________________________________________________
+##  A GOOD RULE OF THUMB    ##
+
+    --  Always SELECT to check before using UPDATE or DELETE just to be sure you do not update or delete something by mistake.
+________________________________________________________________________________________________________________________________
+    
+
+_______________________________________________________________________________________________________________________________
+
+##  (C) -- INSERTING DATA   ##
+________________________________________________________________________________________________________________________________
+1.  [INSERT INTO - VALUES] -- To create individual rows. Single / Multiple rows can also be created at the same time.
+    
+    Query Syntax --
+        INSERT INTO <table_name>
+            (<column1_name>, <column2_name>)
+        VALUES
+            (<column1_value1>, <column2_value1>),       -- Represents entries of row-1
+            (<column1_value2>, <column2_value2>),       -- Represents entries of row-2
+            (<column1_value3>, <column2_value3>);       -- Represents entries of row-3
+
+        Note :
+            --  To see the inserted data, use:
+                
+                SELECT * from <table_name>;
+________________________________________________________________________________________________________________________________
+
+##  (R) -- RETRIEVING DATA   ##
+________________________________________________________________________________________________________________________________
+2.  [SELECT - FROM] -- To retrieve data from a table.
+    
+    Query Syntax --
+        SELECT <column1_name>, <column2_name> FROM <table_name>;
+
+        -- Alias:   Aliasing can also be done to modify the column name. No permanent change.
+        
+                    Query : SELECT <column1_name> AS col1, <column2_name> AS col2, FROM <table_name>
+________________________________________________________________________________________________________________________________
+
+##  (U) -- UPDATING DATA   ##
+________________________________________________________________________________________________________________________________
+3.  [UPDATE - SET - WHERE] -- To update rows. (What is the updated date & on which row(s) are we performing the update?)
+    
+    Query Syntax --
+        UPDATE <table_name> SET <column1_name> = <value1> WHERE <column2_name> = <value2>;
+
+        Note :
+            --  To update multiple columns at the same time, use:
+
+                Query : UPDATE <table_name> SET <column1_name> = <value1>, <column2_name> = <value2> WHERE <column3_name> = <value3>;
+        
+        
+            --  If used without WHERE clause, all the rows will be updated for the chosen column(s).
+
+                Query : UPDATE <table_name> SET <column1_name> = <value1>, <column2_name> = <value2>;
+_______________________________________________________________________________________________________________________________
+
+##  (D) -- DELETING DATA   ##
+________________________________________________________________________________________________________________________________
+4.  [DELETE FROM - WHERE] -- To delete row(s). (Where are we performing the deletion?)
+
+    Query Syntax --
+        DELETE FROM <table_name> WHERE <column1_name> = <value1>;
+
+        Note :
+            --  If used without WHERE clause, all the rows will be deleted and the table will be empty.
+                Keep in mind, the table will not be deleted only the data in it. To delete a table we must use DROP TABLE.
+
+                Query : DELETE FROM <table_name>;
