@@ -100,7 +100,6 @@ Before moving forward : Let us add few more books to the books table.
         We can also order by columns that aren't necessarily part of the table but are results of a SQL query.
         By using an alias for the result we can reference that name in ORDER BY later on.
         
-
             e.g. 1 --   SELECT CONCAT(author_fname, ' ', author_lname) AS author FROM books
                         ORDER BY author;
 
