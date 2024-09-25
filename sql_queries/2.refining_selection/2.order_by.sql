@@ -68,6 +68,6 @@ ORDER BY author, year DESC;
 -- MORE ON ORDER BY --
 
 -- query 16 : A BAD practice.
-            -- Compromises code readability.
+            -- This approach Compromises code readability.
 SELECT book_id, title, released_year, pages FROM books
 ORDER BY 4;

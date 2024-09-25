@@ -105,10 +105,10 @@ ________________________________________________________________________________
     Query Syntax --
         SELECT UPPER(<string>);
 
-            e.g. -- SELECT UPPER('Hello')                                                           -- Result : 'HELLO'
-            e.g. -- SELECT LOWER('Hello')                                                           -- Result : 'hello'
-            e.g. -- SELECT UCASE('World')                                                           -- Result : 'WORLD'
-            e.g. -- SELECT LCASE('World')                                                           -- Result : 'world'
+            e.g. -- SELECT UPPER('Hello');                                                          -- Result : 'HELLO'
+            e.g. -- SELECT LOWER('Hello');                                                          -- Result : 'hello'
+            e.g. -- SELECT UCASE('World');                                                          -- Result : 'WORLD'
+            e.g. -- SELECT LCASE('World');                                                          -- Result : 'world'
 -----------------------------------------------------------------------------------------------------------------------------------
 8.  INSERT -- Removes characters and inserts new string at the given position.
               Takes 4 arguments.

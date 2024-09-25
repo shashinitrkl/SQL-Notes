@@ -118,15 +118,16 @@ Before moving forward : Let us add few more books to the books table.
     || More on ORDER BY :  NOT MUCH USEFUL -- A BAD PRACTICE
 
         Selection of column for sorting can also be done by mentioning a number.
-        The number represents the position of the column in select query.
-        It compromises code readability.
+        The number represents the position of the column in the select query.
+        This approach compromises code readability.
 
             e.g. 1 --   SELECT book_id, title, released_year, pages FROM books
                         ORDER BY 4; 
             e.g. 2 --   SELECT book_id, title, released_year, pages FROM books
                         ORDER BY 3 DESC; 
 -------------------------------------------------------------------------------------------------------------------------
-3.  LIMIT --
+3.  LIMIT --    To control the number of results we get back.
+                Often used alongside ORDER BY.
 
     Query Syntax --
         SELECT
