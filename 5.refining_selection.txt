@@ -33,8 +33,8 @@ Before moving forward : Let us add few more books to the books table.
                 First the select query fetches the entire data and then sorts it according to the chosen column.
                 By default the sorting is done is ascending order. For descending, it needs to be mentioned.
                 The column needed to sort the query may or may not be a part of the select query.
-                
-                A good practice --  To select the column used for sorting so that the sorting can be visualized.
+
+                    -- A GOOD PRACTICE : To select the column used for sorting so that the sorting can be visualized.
 
     Query Syntax --
         -- Default | Ascending --  ASC can be used for ascending too. 
@@ -127,12 +127,42 @@ Before moving forward : Let us add few more books to the books table.
                         ORDER BY 3 DESC; 
 -------------------------------------------------------------------------------------------------------------------------
 3.  LIMIT --    To control the number of results we get back.
-                Often used alongside ORDER BY.
+                Often used alongside ORDER BY. Without it basically means ordered by the primary keys.
 
     Query Syntax --
-        SELECT
+        SELECT <column_name> FROM <table_name>
+        ORDER BY <column_name>
+        LIMIT <#_of_results_required>;
 
-            e.g. 1 --  
+            e.g. 1 --   SELECT book_id, author_fname, author_lname FROM books
+                        ORDER BY author_lname LIMIT 5;
+
+            e.g. 2 --   SELECT book_id, title, stock_quantity FROM books
+                        ORDER BY stock_quantity LIMIT 10;  
+
+            e.g. 3 --   SELECT title, released_year FROM books
+                        ORDER BY released_year DESC LIMIT 7;
+
+    || More on LIMIT ||
+    
+    LIMIT with 2 integers -- This allows us to select a subset in the middle of a grouping.
+
+            --  The 1st integer represents the starting row. 0 means 1st row and so on.
+            --  The 2nd integer represents the number if rows we want.
+
+            e.g. 1 --   || 5 rows starting from row 2 ||
+            
+                    SELECT book_id, author_fname, author_lname FROM books
+                    ORDER BY author_lname LIMIT 1, 5;
+
+            e.g. 2 --   || 2 rows starting from row 4 ||
+            
+                    SELECT book_id, title, released_year FROM books
+                    ORDER BY released_year LIMIT 3, 2;
+
+                            
+
+
 -------------------------------------------------------------------------------------------------------------------------
 4.  LIKE --
 

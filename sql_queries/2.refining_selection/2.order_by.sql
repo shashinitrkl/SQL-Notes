@@ -18,9 +18,9 @@ ORDER BY author_lname;
 SELECT book_id, title, stock_quantity FROM books
 ORDER BY stock_quantity;
 
--- query 6 : A BAD practice.
-            -- Sorting column is not a part of the select query.
-            -- Also ASC isn't really required. By default it is in ascending order.
+-- query 6 : A BAD PRACTICE.
+    -- Sorting column is not a part of the select query.
+    -- Also ASC isn't really required. By default it is in ascending order.
 
 SELECT book_id, title, author_fname, author_lname FROM books
 ORDER BY released_year ASC; 
